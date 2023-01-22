@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600&display=swap');
+@import './modal.css';
+
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+	margin: 0;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem 2rem;
+	background-color: #5294eb;
+}
+
+header .title {
+	color: #fff;
+	margin: 0;
+	margin-bottom: 0.5rem;
+}
+header .remaining-tasks {
+	font-size: 1.2rem;
+	font-weight: lighter;
+	color: #bcd6f8;
+}
+
+main {
+	margin: 1rem 2rem;
+}
+
+.btn {
+	display: inline-flex;
+	padding: 0.5rem 0.8rem;
+	font-size: 1rem;
+	border: none;
+	outline: none;
+	background-color: #dcdde1;
+}
+.btn:hover {
+	background-color: #c5cadb;
+}
+.btn.success {
+	background-color: #11c15b;
+	color: white;
+}
+.btn.success:hover {
+	background-color: #13a851;
+}
+.btn.secondary {
+	background-color: #95c3ff;
+	color: white;
+}
+.btn.secondary:hover {
+	background-color: #7aa3da;
+}
+
+.btn svg {
+	pointer-events: none;
+}
+
+.tasks-table {
+	border: 1px solid #dcdde1;
+	padding: 0.5rem;
+}
+
+.tasks-table table {
+	width: 100%;
+}
+
+.tasks-table thead {
+	background-color: #dcdde1;
+}
+
+.tasks-table thead th {
+	padding: 0.5rem;
+}
+
+.tasks-table tbody tr td {
+	padding: 0.5rem;
+}
+
+.tasks-table .completed {
+	background-color: #5294eb;
+}
+
+.tasks-table [data-sortable] {
+	cursor: pointer;
+}
+.tasks-table [data-sortable]::after {
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 0.25rem;
+	vertical-align: middle;
+	border-top: 0.3em solid;
+	border-right: 0.3em solid transparent;
+	border-bottom: 0em;
+	border-left: 0.3em solid transparent;
+}
+.tasks-table [data-sortable].active {
+	color: #5294eb;
+}
+.tasks-table [data-sortable].active.asc::after {
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 0.25rem;
+	vertical-align: middle;
+	border-top: 0.3em solid;
+	border-right: 0.3em solid transparent;
+	border-bottom: 0em;
+	border-left: 0.3em solid transparent;
+}
+.tasks-table [data-sortable]:hover {
+	color: #718093;
+}
+.tasks-table [data-sortable].desc::after {
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 0.25rem;
+	margin-bottom: 0.5rem;
+	vertical-align: middle;
+	border-top: 0.3em solid transparent;
+	border-right: 0.3em solid transparent;
+	border-bottom: 0.3em solid;
+	border-left: 0.3em solid transparent;
+}

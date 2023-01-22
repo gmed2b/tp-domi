@@ -1,0 +1,95 @@
+#modal-overlay {
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #0008;
+	pointer-events: none;
+}
+
+#modal-overlay.active {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	border: 1px solid #222;
+	border-radius: 0.5rem;
+	background-color: white;
+	width: 500px;
+	max-width: 80%;
+	z-index: 10;
+	transition: 0.2s ease-in-out;
+}
+
+.modal.active {
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.75rem 1rem;
+	border-bottom: 1px solid #222;
+}
+
+.modal-header .title {
+	margin: 0;
+	font-size: 1.25rem;
+}
+
+.modal-header .close {
+	cursor: pointer;
+	font-size: 1.25rem;
+	font-weight: bold;
+	border: none;
+	outline: none;
+	background: none;
+}
+
+.modal-content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding: 1rem;
+}
+
+.modal-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.modal-form .form-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.modal-form .form-item label {
+	font-size: 0.9rem;
+	font-weight: bold;
+}
+
+.modal-form .form-item input,
+.modal-form .form-item textarea,
+.modal-form .form-item select {
+	padding: 0.5rem;
+	border: 1px solid #222;
+	border-radius: 0.25rem;
+	font-family: 'Lato', sans-serif;
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.5rem 1rem;
+	border-top: 1px solid #222;
+}

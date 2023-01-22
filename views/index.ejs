@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>TP Javascript - Mehdi</title>
+		<link
+			rel="stylesheet"
+			href="./css/style.css"
+		/>
+	</head>
+
+	<body>
+		<header>
+			<div>
+				<h1 class="title">Listes des devoirs</h1>
+				<span class="remaining-tasks"><span data-task-count></span> devoirs restants</span>
+			</div>
+			<div>
+				<button
+					class="btn success"
+					data-modal-target="#add-task-modal"
+				>
+					Add
+				</button>
+				<button
+					class="btn secondary"
+					data-modal-target="#add-subject-modal"
+				>
+					Add Subject
+				</button>
+			</div>
+		</header>
+
+		<main>
+			<div class="tasks">
+				<div class="tasks-table">
+					<table>
+						<thead>
+							<tr>
+								<th data-sortable="name">Nom</th>
+								<th>Description</th>
+								<th data-sortable="subject">Matière</th>
+								<th data-sortable="dueDate">Date</th>
+								<th data-sortable="priority">Priorité</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody id="tasks-list"></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div
+				id="add-task-modal"
+				class="modal"
+			>
+				<form
+					id="add-task-form"
+					class="modal-form"
+				>
+					<div class="modal-header">
+						<h2 class="title">Ajouter un devoir</h2>
+						<button
+							type="reset"
+							class="close"
+							data-close-modal
+						>
+							&times;
+						</button>
+					</div>
+					<div class="modal-content">
+						<div class="form-item">
+							<label for="task-name">Nom</label>
+							<input
+								type="text"
+								id="task-name"
+								name="task-name"
+								placeholder="Nom du devoir"
+								required
+							/>
+						</div>
+						<div class="form-item">
+							<label for="task-description">Description</label>
+							<textarea
+								id="task-description"
+								name="task-description"
+								placeholder="Description du devoir"
+								required
+							></textarea>
+						</div>
+						<div class="form-item">
+							<label for="task-subject">Matière</label>
+							<select
+								id="task-subject"
+								name="task-subject"
+							>
+								<option value="">Aucune</option>
+							</select>
+						</div>
+						<div class="form-item">
+							<label for="task-due-date">Date de rendu</label>
+							<input
+								type="date"
+								id="task-due-date"
+								name="task-due-date"
+								required
+							/>
+						</div>
+						<div class="form-item">
+							<label for="task-priority">Priorité</label>
+							<select
+								id="task-priority"
+								name="task-priority"
+							>
+								<option value="0">Aucune</option>
+								<option value="1">Faible</option>
+								<option value="2">Moyenne</option>
+								<option value="3">Haute</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button
+							class="btn"
+							type="reset"
+							data-close-modal
+						>
+							Cancel
+						</button>
+						<button
+							class="btn"
+							type="submit"
+						>
+							Save
+						</button>
+					</div>
+				</form>
+			</div>
+
+			<div
+				id="add-subject-modal"
+				class="modal"
+			>
+				<form
+					id="add-subject-form"
+					class="modal-form"
+				>
+					<div class="modal-header">
+						<h2 class="title">Ajouter une matière</h2>
+						<button
+							type="reset"
+							class="close"
+							data-close-modal
+						>
+							&times;
+						</button>
+					</div>
+					<div class="modal-content">
+						<div class="form-item">
+							<label for="subject-name">Nom</label>
+							<input
+								type="text"
+								id="subject-name"
+								name="subject-name"
+								placeholder="Nom de la matière"
+							/>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button
+							class="btn"
+							type="reset"
+							data-close-modal
+						>
+							Cancel
+						</button>
+						<button
+							class="btn"
+							type="submit"
+						>
+							Save
+						</button>
+					</div>
+				</form>
+			</div>
+
+			<template id="task-item-template">
+				<tr data-task-id>
+					<td data-task-name></td>
+					<td data-task-description></td>
+					<td data-task-subject></td>
+					<td data-task-due-date></td>
+					<td data-task-priority></td>
+					<td
+						data-task-actions
+						style="display: flex; gap: 0.5rem"
+					>
+						<button
+							class="btn"
+							id="terminate-task-button"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								fill="currentColor"
+								class="bi bi-check-circle-fill"
+								viewBox="0 0 16 16"
+							>
+								<path
+									d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+								/>
+							</svg>
+						</button>
+						<button
+							class="btn"
+							id="delete-task-button"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								fill="currentColor"
+								class="bi bi-trash3-fill"
+								viewBox="0 0 16 16"
+							>
+								<path
+									d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+								/>
+							</svg>
+						</button>
+					</td>
+				</tr>
+			</template>
+
+			<div id="modal-overlay"></div>
+		</main>
+
+		<script
+			type="module"
+			src="./js/main.js"
+		></script>
+		<script
+			type="module"
+			src="./js/modal.js"
+		></script>
+	</body>
+</html>
